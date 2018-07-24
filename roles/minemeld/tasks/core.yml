@@ -4,13 +4,13 @@
     repo: "{{core_repo}}"
     clone: yes
     dest: "{{engine_directory}}/core"
-    version: "{{minemeld_version}}"
+    version: "{{minemeld_core_ref}}"
 
 # creates the virtualenv in the engine/current directory and install reqs
 - name: virtualenv
   pip: name=virtualenv
 - name: minemeld virtualenv
-  command: virtualenv "{{venv_directory}}" -p python2.7 creates="{{venv_directory}}"
+  command: virtualenv "{{venv_directory}}" -p python3.6 creates="{{venv_directory}}"
 - name: virtualenv permissions
   file: path="{{venv_directory}}" state=directory recurse=yes owner=minemeld group=minemeld mode="{{file_permissions}}"
 - name: requirements
@@ -55,14 +55,14 @@
     owner: minemeld
     group: minemeld
     mode: 0644
-- name: minemeld-web config defaults
+- name: minemeld-api config defaults
   template:
     dest: "{{api_config_directory}}/10-defaults.yml"
     src: 10-defaults.yml.j2
     owner: minemeld
     group: minemeld
     mode: 0644
-- name: minemeld-web config local
+- name: minemeld-api config local
   template:
     force: no
     dest: "{{api_config_directory}}/20-local.yml"
@@ -70,7 +70,7 @@
     owner: minemeld
     group: minemeld
     mode: 0644
-- name: minemeld-web users
+- name: minemeld-api users
   copy:
     force: no
     dest: "{{api_config_directory}}/wsgi.htpasswd"
@@ -94,10 +94,10 @@
     owner: minemeld
     group: minemeld
     mode: 0644
-- name: supervisor minemeld-web program
+- name: supervisor minemeld-api program
   template:
-    src: minemeld-web.supervisord.j2
-    dest: "{{supervisor_directory}}/config/conf.d/minemeld-web.conf"
+    src: minemeld-api.supervisord.j2
+    dest: "{{supervisor_directory}}/config/conf.d/minemeld-api.conf"
     owner: minemeld
     group: minemeld
     mode: 0644
