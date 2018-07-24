@@ -8,5 +8,6 @@ structure_packages:
   - libxslt1-dev
   - libc-ares-dev
   - libsnappy-dev
+  - python3-dev
 
 distribution_post_task: Ubuntu-18.04-post

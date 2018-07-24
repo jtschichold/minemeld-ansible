@@ -28,7 +28,6 @@
     owner: redis
     group: root
     mode: 0600
-  notify: restart redis
 
 # start services
 - name: start redis-server

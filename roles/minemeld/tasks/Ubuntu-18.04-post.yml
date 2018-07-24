@@ -14,8 +14,8 @@
   notify: restart nginx
 - name: nginx config
   template:
-    src: minemeld-web.nginx.j2
-    dest: /etc/nginx/sites-enabled/minemeld-web
+    src: minemeld-api.nginx.j2
+    dest: /etc/nginx/sites-enabled/minemeld-api
     owner: root
     group: root
     mode: 0644
